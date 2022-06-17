@@ -1,8 +1,14 @@
 <template>
   <div class="hello">
     <input id="signal" type="text" v-model="signal" placeholder="Ingrese la función de la señal">
-    <input type="text" v-model="period" id="period" placeholder="Ingrese el periodo">
-    <button id="operate" @click="operate">Calcular</button>
+    <br>
+    <input type="number" v-model="less" class="period" placeholder="-T/2">
+    &lt; t &le;
+    <input type="number" v-model="greater" class="period" placeholder="T/2">
+    <br>
+    ¿Cuántos armónicos?  <input type="number" v-model="harmonics" id="harmonics">
+    <br>
+    <button id="operate" @click="operate">Computar</button>
   </div>
 </template>
 
@@ -12,14 +18,18 @@ export default {
   data(){
     return{
       signal: "",
-      period: ""
+      less: "",
+      greater: "",
+      harmonics: 0
     }
   },
   methods:{
     operate(){
       let data = {
         signal: this.signal,
-        period: this.period
+        less: this.less,
+        greater: this.greater,
+        harmonics: this.harmonics
       }
 
       this.$emit('operate-signal', data)
@@ -29,6 +39,10 @@ export default {
 </script>
 
 <style scoped>
+  p{
+    font-size: 1em;
+  }
+
   #signal{
     color: #566573;
     font-size: 1em;
@@ -37,11 +51,10 @@ export default {
     margin: 8px 0;
     box-sizing: border-box;
   }
-
-  #period{
+  .period{
     color: #566573;
     font-size: 1em;
-    width: 10%;
+    width: 3%;
     padding: 12px 10px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -57,8 +70,14 @@ export default {
     color: white;
     height: 3em;
     border: none;
-    background-color: #5499C7;
+    background-color: #4285f4;
     border-radius: 0.3em;
     cursor: pointer;
   }
+
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
