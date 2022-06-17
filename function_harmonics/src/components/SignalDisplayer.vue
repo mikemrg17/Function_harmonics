@@ -1,5 +1,8 @@
 <template>
-    <vue-p5 @sketch="sketch"></vue-p5>
+    <div>
+        <vue-p5 @sketch="sketch"></vue-p5>
+        {{harmonic}}
+    </div>
 </template>
 
 <script>
@@ -10,19 +13,31 @@ export default {
     components:{
         "vue-p5": VueP5
     },
+    props:{
+        harmonic: {
+            type: String,
+            default: () => ""
+        },
+        nHarmonic:{
+            type: Number,
+            default: 0
+        }
+    },
     data(){
         return {
             slider : null,
             time: 0,
             wave: [],
             z: 100, 
+            radius: 0,
+            n: 0
         }
     },
     methods:{
         sketch(sk){
             sk.setup = () => {
                 sk.createCanvas(800,400)
-                this.slider = sk.createSlider(1, 10 , 5)
+                this.slider = sk.createSlider(1, 10 , 0)
             },
             sk.draw = () => {
                 sk.background('white')
@@ -59,7 +74,7 @@ export default {
                 }
                 sk.endShape();
 
-                $vm.time += 0.05;
+                $vm.time += 0.03;
 
                 if ($vm.wave.length > 250) {
                     $vm.wave.pop();
@@ -67,6 +82,11 @@ export default {
             }
         }
     },
+    mounted(){
+        let harmonic_split = this.harmonic.split("*")
+        this.radius = parseInt(harmonic_split[0], 10)
+        this.n = this.nHarmonic
+    }
 };
 </script>
 

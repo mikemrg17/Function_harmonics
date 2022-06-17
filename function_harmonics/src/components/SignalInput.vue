@@ -6,7 +6,7 @@
     &lt; t &le;
     <input type="number" v-model="greater" class="period" placeholder="T/2">
     <br>
-    ¿Cuántos armónicos?  <input type="number" v-model="harmonics" id="harmonics">
+    ¿Cuántos armónicos?  <input type="number" v-model="harmonics" id="harmonics" min="1">
     <br>
     <button id="operate" @click="operate">Computar</button>
   </div>
@@ -54,7 +54,7 @@ export default {
   .period{
     color: #566573;
     font-size: 1em;
-    width: 3%;
+    width: 4%;
     padding: 12px 10px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -65,7 +65,7 @@ export default {
   }
 
   #operate{
-    width: 5%;
+    width: 7%;
     font-size: 1em;
     color: white;
     height: 3em;
